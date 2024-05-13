@@ -1,3 +1,3 @@
 declare interface Window {
-  tiangong_tracer: any;
+  bitou_tracer: any;
 }

@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.12.11",
     "open-cli": "^7.0.1",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
