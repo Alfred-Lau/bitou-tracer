@@ -1,4 +1,4 @@
-name: tiangong-tracert deploy
+name: tiangong-tracer deploy
 
 on:
   push:
@@ -35,4 +35,4 @@ jobs:
           # 使用我们之前配置在secrets里面的accesskeys来配置ossutil
           access-key-id: ${{ secrets.ACCESS_KEY }}
           access-key-secret: ${{ secrets.ACCESS_SECRET }}
-      - run: ossutil cp -rf dist oss://tiangong-tracert
+      - run: ossutil cp -rf dist oss://tiangong-tracer

@@ -1,48 +1,26 @@
 {
-  "name": "log",
-  "version": "0.0.7",
-  "main": "dist/tiangong-sdk.cjs.js",
-  "module": "dist/tiangong-sdk.esm.js",
-  "browser": "dist/tiangong-sdk.umd.js",
-  "description": "上报脚本",
-  "devDependencies": {
-    "@types/ms": "^0.7.30",
-    "@types/uuid": "^8.3.0",
-    "eslint": "^6.7.2",
-    "eslint-config-egg": "^8.0.0",
-    "rollup": "^1.0.0",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-typescript": "^1.0.0",
-    "ts-node": "^7.0.1",
-    "tslib": "^1.9.3",
-    "typescript": "^3.2.2"
-  },
-  "files": [
-    "dist",
-    "rollup.config.js"
-  ],
-  "dependencies": {
-    "@types/ua-parser-js": "^0.7.35",
-    "brolog": "^1.12.4",
-    "js-sls-logger": "^2.0.0-beta.2",
-    "ua-parser-js": "^0.7.24",
-    "uuid": "^8.3.2"
-  },
-  "engines": {
-    "node": ">=10.0.0"
-  },
+  "name": "bitou-tracer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "test": "ts-node test/test.ts",
-    "pretest": "npm run build",
-    "autod": "autod",
-    "lint": "eslint .",
-    "cov": "egg-bin cov",
-    "ci": "npm run lint && egg-bin pkgfiles --check && npm run cov",
-    "pkgfiles": "egg-bin pkgfiles"
+    "dev": "pnpm -r  --filter \"./packages/*\" --parallel run dev",
+    "build": "pnpm -r --filter \"./packages/*\" run build",
+    "publish-all": "pnpm --filter \"./packages/*\" --parallel run release",
+    "version-update": "pnpm --filter \"./packages/*\" version patch",
+    "publish-some": "pnpm --filter \"@my-monorepo/specific-package\" run release",
+    "open": "open-cli http://localhost:3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.11",
+    "open-cli": "^7.0.1",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
 }
