@@ -1,9 +1,11 @@
+import { UserAgentInfo } from 'src/BitouTracerType';
 import UA from 'ua-parser-js';
 import { EE } from 'utils';
+import { handleType } from 'utils/lib/BitouType';
 
 import Tracer from '../tracer';
 
-export default class UserAgent extends EE implements Model {
+export default class UserAgent extends EE {
   private ua: UA;
   private tracer: Tracer;
   public cb: handleType | undefined;
@@ -15,7 +17,7 @@ export default class UserAgent extends EE implements Model {
     this.cb && this.cb(this);
   }
 
-  private _collect(): Model.UserAgentInfo {
+  private _collect(): UserAgentInfo {
     const browser = this.browser;
     const device = this.device;
     const engine = this.engine;
@@ -34,29 +36,29 @@ export default class UserAgent extends EE implements Model {
     };
   }
 
-  public get info(): Model.UserAgentInfo {
+  public get info(): UserAgentInfo {
     return this._collect();
   }
 
-  private get browser(): Model.UserAgentInfo["browser"] {
+  private get browser(): UserAgentInfo["browser"] {
     return this.ua.getBrowser();
   }
-  private get device(): Model.UserAgentInfo["device"] {
+  private get device(): UserAgentInfo["device"] {
     return this.ua.getDevice();
   }
-  private get engine(): Model.UserAgentInfo["engine"] {
+  private get engine(): UserAgentInfo["engine"] {
     return this.ua.getEngine();
   }
-  private get cpu(): Model.UserAgentInfo["cpu"] {
+  private get cpu(): UserAgentInfo["cpu"] {
     return this.ua.getCPU();
   }
-  private get os(): Model.UserAgentInfo["os"] {
+  private get os(): UserAgentInfo["os"] {
     return this.ua.getOS();
   }
-  private get useragent(): Model.UserAgentInfo["useragent"] {
+  private get useragent(): UserAgentInfo["useragent"] {
     return this.ua.getUA();
   }
-  private static get screen(): Model.UserAgentInfo["screen"] {
+  private static get screen(): UserAgentInfo["screen"] {
     return {
       width: screen.width,
       height: screen.height,

@@ -25,16 +25,8 @@ export default [
       typescript({
         sourceMap: !production,
         inlineSources: !production,
-        lib: ["es2015", "dom"],
+        lib: ["dom", "scripthost", "es2015"],
       }), // so Rollup can convert TypeScript to JavaScript
-      // alias({
-      //   entries: [
-      //     {
-      //       find: 'utils',
-      //       replacement: path.resolve(__dirname, '../utils/src/index.ts'),
-      //     },
-      //   ],
-      // }),
     ],
   },
 
@@ -48,14 +40,6 @@ export default [
         sourceMap: !production,
         inlineSources: !production,
       }), // so Rollup can convert TypeScript to JavaScript
-      // alias({
-      //   entries: [
-      //     {
-      //       find: 'utils',
-      //       replacement: path.resolve(__dirname, '../utils/src/index.ts'),
-      //     },
-      //   ],
-      // }),
     ],
     output: [
       { file: pkg.main, format: "cjs", sourcemap: !production },

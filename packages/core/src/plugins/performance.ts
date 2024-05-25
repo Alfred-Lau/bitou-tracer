@@ -1,4 +1,4 @@
-import { handleType } from 'src/BitouTracerType';
+import { handleType } from 'utils/lib/BitouType';
 
 import Tracer from '../tracer';
 

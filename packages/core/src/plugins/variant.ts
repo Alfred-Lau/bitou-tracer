@@ -1,3 +1,5 @@
+import { handleType } from 'utils/lib/BitouType';
+
 import Tracer from '../tracer';
 
 // TODO：AB 实验模块

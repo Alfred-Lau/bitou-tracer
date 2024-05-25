@@ -7,8 +7,13 @@ import {
   mergeOptions,
   uuid,
 } from 'utils';
+import { handleType } from 'utils/lib/BitouType';
 
 import Base from './base';
+import {
+  BootstrapOptions,
+  PluginOptions,
+} from './BitouTracerType';
 import UserAgent from './models/agent';
 import click from './plugins/click';
 import error from './plugins/error';
@@ -24,7 +29,7 @@ type BasicOptionType = {
   version: string;
 };
 
-type FullOptionsType = Partial<CORE.BootstrapOptions> & BasicOptionType;
+type FullOptionsType = Partial<BootstrapOptions> & BasicOptionType;
 
 const defaultOptions: BasicOptionType = {
   version: getVersion(),
@@ -49,7 +54,7 @@ export default class Tracer extends Base {
   private modelReady: boolean | null = null;
 
   private TRACER_SESSION_ID: string;
-  constructor(opts?: Partial<CORE.BootstrapOptions>) {
+  constructor(opts?: Partial<BootstrapOptions>) {
     super("");
     //此处初始化加载实体
     if (isEmptyObject(opts)) {
@@ -83,11 +88,11 @@ export default class Tracer extends Base {
       });
   }
 
-  public mergePluginOptions(name: string, option: Partial<CORE.PluginOptions>) {
+  public mergePluginOptions(name: string, option: Partial<PluginOptions>) {
     log.info(option);
   }
 
-  public addPlugin(plugin: handleType, option: Partial<CORE.PluginOptions>) {
+  public addPlugin(plugin: handleType, option: Partial<PluginOptions>) {
     this.mergePluginOptions("", option);
     // push 一个函数或者类进去
     this[Plugin].push({ name: plugin.name, plugin });

@@ -3,9 +3,10 @@ import {
   log,
 } from 'utils';
 
+import { BootstrapOptions } from './BitouTracerType';
 import Tracer from './tracer';
 
-function createTracer(options?: CORE.BootstrapOptions) {
+function createTracer(options?: BootstrapOptions) {
   const opts = options;
   const tracer = new Tracer(opts);
   // 设置重复试探挂载逻辑

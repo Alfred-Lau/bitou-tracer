@@ -1,13 +1,34 @@
 import BaseDataSource from './base';
 
+const REPORT_URL = "http://localhost:4000/api/tiangong/v1/log";
+
+function xhr(data: string) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", REPORT_URL, true);
+  xhr.send(JSON.stringify(data) as any);
+}
+
+function sendBeacon(data: string) {
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon(REPORT_URL, "");
+  }
+}
+
+function httpRequest(data: any) {
+  // if (navigator) {
+  //   sendBeacon(body);
+  // } else {
+  //   xhr(body);
+  // }
+  // 优化后的代码,不使用navigator.sendBeacon，直接使用xhr
+  xhr(data);
+}
+
 export default class RdsAdapter extends BaseDataSource {
-  private tracker: any;
   constructor() {
     super();
-    // new api
-    // this.tracker = new SLS(opts);
   }
   public send(data: any): void {
-    // this.tracker.send(data);
+    httpRequest(data);
   }
 }

@@ -10,8 +10,11 @@ import {
   log,
   noop,
 } from 'utils';
+import {
+  handleType,
+  SimpleEventPayloadType,
+} from 'utils/lib/BitouType';
 
-import { handleType } from './BitouTracerType';
 import http from './http';
 import Tracer from './tracer';
 

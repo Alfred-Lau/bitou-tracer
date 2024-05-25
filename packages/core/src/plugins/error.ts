@@ -1,4 +1,5 @@
 import { log } from 'utils';
+import { handleType } from 'utils/lib/BitouType';
 
 import Tracer from '../tracer';
 
