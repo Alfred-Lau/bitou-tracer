@@ -1,9 +1,15 @@
-import { isBrowser, cookie, log } from 'utils';
-import { ALiYunSLSAddress, CSRF_AUTHORIZATION_KEY } from 'utils';
-import tracker from '../sls';
+import {
+  ALiYunSLSAddress,
+  cookie,
+  CSRF_AUTHORIZATION_KEY,
+  isBrowser,
+  log,
+} from 'utils';
+
+import Datasource from '../datasource';
 
 const _csrf_authentication =
-  cookie.getCookie(CSRF_AUTHORIZATION_KEY) || 'OY3i2d-Dp9C2wGe14EslzT61';
+  cookie.getCookie(CSRF_AUTHORIZATION_KEY) || "OY3i2d-Dp9C2wGe14EslzT61";
 
 function genImgUrl(url: string, data: any) {
   const formatted = JSON.stringify(data);
@@ -11,9 +17,9 @@ function genImgUrl(url: string, data: any) {
 }
 
 function basicHttp(url: string, data: any) {
-  const img = document?.createElement('img');
+  const img = document?.createElement("img");
   img.src = genImgUrl(url, data);
-  img.style.display = 'none';
+  img.style.display = "none";
   document.body.appendChild(img);
 }
 
@@ -23,7 +29,8 @@ export default function (
 ) {
   try {
     if (!throughAPI) {
-      tracker.send(data);
+      const datasource = new Datasource("sls");
+      datasource.send(data);
       return;
     } else {
       if (isBrowser) {
@@ -39,6 +46,6 @@ export default function (
       }
     }
   } catch (e) {
-    log.error('http 模块发生了错误', 'http');
+    log.error("http 模块发生了错误", "http");
   }
 }
