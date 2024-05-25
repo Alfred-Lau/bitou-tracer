@@ -9,8 +9,12 @@ import {
 import Base from '../base';
 import UserAgent from '../models/agent';
 import click from '../plugins/click';
+import error from '../plugins/error';
 import input from '../plugins/input';
+import performance from '../plugins/performance';
 import spa from '../plugins/spa';
+import utm from '../plugins/utm';
+import { getNetworkSpeed } from '../utils/network';
 import { getVersion } from '../utils/version';
 
 const Model = Symbol("bitou_tracer#model");
@@ -30,6 +34,9 @@ const defaultPlugins = [
   { name: "click", plugin: click },
   { name: "input", plugin: input },
   { name: "spa", plugin: spa },
+  { name: "performance", plugin: performance },
+  { name: "error", plugin: error },
+  { name: "utm", plugin: utm },
 ];
 
 export default class Tracer extends Base {
@@ -118,11 +125,15 @@ export default class Tracer extends Base {
     return this.send("click", options);
   }
 
+  public async getNetworkSpeed() {
+    return await getNetworkSpeed();
+  }
+
   /**
    * 1. 检查环境;
    * 2. 初始化各类实体，插件列表
    */
-  public prepare() {
+  public async prepare() {
     try {
       this.http(
         {
@@ -139,6 +150,10 @@ export default class Tracer extends Base {
     if (!localStorage.getItem(key)) {
       localStorage.setItem(key, `${uuid()}_${new Date().getTime()}}`);
     }
+
+    // 初始化业务逻辑
+    const speed = await getNetworkSpeed();
+    console.log("🚀 ~ Tracer ~ localStorage.setItem ~ speed:", speed, "KB");
     //  加载实体: 传参监视；默认 defaultModels 这个需要做处理
     for (const p of defaultModels) {
       const { model } = p;

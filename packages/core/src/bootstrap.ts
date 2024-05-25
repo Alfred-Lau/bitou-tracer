@@ -5,6 +5,15 @@ import {
 
 import Tracer from './tracer';
 
+declare global {
+  interface Window {
+    bitou_tracer: any;
+  }
+  interface Navigator {
+    connection: any;
+  }
+}
+
 function bootstrap(options?: CORE.BootstrapOptions) {
   const opts = options;
   const tracer = new Tracer(opts);

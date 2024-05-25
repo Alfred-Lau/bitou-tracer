@@ -1,23 +1,23 @@
 // 1. 图片接口上传；2. sendBeacon接口上传
 
 const REPORT_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://www.baidu.com'
-    : 'http://localhost:4000';
+  process.env.NODE_ENV === "production"
+    ? "https://www.baidu.com"
+    : "http://localhost:4000";
 
 function xhr(data: string) {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', REPORT_URL, true);
+  xhr.open("GET", REPORT_URL, true);
   xhr.send();
 }
 
 function sendBeacon(data: string) {
   if (navigator.sendBeacon) {
-    navigator.sendBeacon(REPORT_URL, '');
+    navigator.sendBeacon(REPORT_URL, "");
   }
 }
 
-export default function httpRequest(data) {
+export default function httpRequest(data: any) {
   const body = normalizeBody(data);
   if (navigator) {
     sendBeacon(body);
@@ -26,5 +26,5 @@ export default function httpRequest(data) {
   }
 }
 function normalizeBody(data: Record<string, any>) {
-  return encodeURIComponent(data.join(';'));
+  return encodeURIComponent(data.join(";"));
 }

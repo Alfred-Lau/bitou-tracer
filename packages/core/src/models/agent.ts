@@ -1,6 +1,7 @@
-import UA from "ua-parser-js";
-import Tracer from "../tracer";
-import EventEmitter from "../utils/EventEmitter";
+import UA from 'ua-parser-js';
+
+import Tracer from '../tracer';
+import EventEmitter from '../utils/EventEmitter';
 
 export default class UserAgent extends EventEmitter implements Model {
   private ua: UA;
