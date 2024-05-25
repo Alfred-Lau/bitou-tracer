@@ -8,7 +8,7 @@ const opts = {
   logstore: "maidan-log-store", // Logstore名称。
   time: 10, // 发送日志的时间间隔，默认是10秒。
   count: 10, // 发送日志的数量大小，默认是10条。
-  topic: "tiangong", // 自定义日志主题。
+  topic: "bitou", // 自定义日志主题。
   source: "source",
   tags: {
     tags: "tags",

@@ -78,6 +78,8 @@ export default class Tracer extends Base {
       .then(this.end.bind(this))
       .finally(() => {
         log.info("初始化结束", "");
+        // 需要进行一次上报
+        this.send("bitou_tracer_ready");
       });
   }
 

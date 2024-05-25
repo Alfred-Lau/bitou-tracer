@@ -27,6 +27,7 @@ export default function (
   data: SimpleEventPayloadType,
   throughAPI: boolean = false // 默认使用日志上传
 ) {
+  console.log("🚀 ~ throughAPI:", throughAPI);
   try {
     if (!throughAPI) {
       const datasource = new Datasource("sls");

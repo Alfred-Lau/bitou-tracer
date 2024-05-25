@@ -14,7 +14,7 @@ export default class DataSource {
   protected initial(type: DataSourceType) {
     switch (type) {
       case "sls":
-        console.log("sls");
+        console.log("使用sls 日志上报");
         return new SlsAdapter();
       case "rds":
         return new RdsAdapter();

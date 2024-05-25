@@ -2,9 +2,17 @@
  * 请实现
  * 采集模块依赖的基类代码【1. 生命周期的机制实现；2. 插件机制的实现；3.】
  */
-import { noop, isFunction, log, defineProperty, debounceFn } from 'utils';
+import {
+  debounceFn,
+  defineProperty,
+  isFunction,
+  log,
+  noop,
+} from 'utils';
+
 import http from '../http';
 import Tracer from '../tracer';
+import { getNetworkSpeed } from '../utils/network';
 
 export type SendOptionType = {
   env: string;
@@ -38,14 +46,14 @@ export default class Base implements BaseClass {
   // 事件周期的回调
   public beforeEachSendPV(fn = noop) {
     if (!isFunction(fn)) {
-      log.error('注册的事件只能是函数', '');
+      log.error("注册的事件只能是函数", "");
       return;
     }
     this.beforeEachSendPVEvents.push(fn);
   }
   public afterEachSendPV(fn = noop) {
     if (!isFunction(fn)) {
-      log.error('注册的事件只能是函数', '');
+      log.error("注册的事件只能是函数", "");
       return;
     }
     this.afterEachSendPVEvents.push(fn);
@@ -63,14 +71,27 @@ export default class Base implements BaseClass {
     });
   }
 
+  protected async collectBaseInfo() {
+    const network = await getNetworkSpeed();
+    console.log("🚀 ~ Base ~ collectBaseInfo ~ network:", network);
+    const baseInfo = {
+      network,
+    };
+
+    return baseInfo;
+  }
+
   // 基础上报的实现
   public async send(eventName: string, options?: SendOptionType) {
     this.beforeEachSendPVEvents.map((ev) => {
       ev && ev();
     });
 
+    const baseInfo = await this.collectBaseInfo();
+
     const payload: Partial<SimpleEventPayloadType> = {
       eventType: eventName,
+      ...baseInfo,
     };
 
     // 防抖处理
