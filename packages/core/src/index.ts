@@ -1,4 +1,3 @@
-import { log } from 'utils';
-import tracer from './bootstrap';
+import tracer from './createTracer';
 
 export default tracer;

@@ -1,21 +1,21 @@
 import {
   bindEvent,
+  getNetworkSpeed,
+  getVersion,
   isEmptyObject,
   log,
   mergeOptions,
   uuid,
 } from 'utils';
 
-import Base from '../base';
-import UserAgent from '../models/agent';
-import click from '../plugins/click';
-import error from '../plugins/error';
-import input from '../plugins/input';
-import performance from '../plugins/performance';
-import spa from '../plugins/spa';
-import utm from '../plugins/utm';
-import { getNetworkSpeed } from '../utils/network';
-import { getVersion } from '../utils/version';
+import Base from './base';
+import UserAgent from './models/agent';
+import click from './plugins/click';
+import error from './plugins/error';
+import input from './plugins/input';
+import performance from './plugins/performance';
+import spa from './plugins/spa';
+import utm from './plugins/utm';
 
 const Model = Symbol("bitou_tracer#model");
 const Plugin = Symbol("bitou_tracer#plugin");
@@ -63,7 +63,7 @@ export default class Tracer extends Base {
     this.pluginReady = false;
     this.modelReady = false;
 
-    this.TRACER_SESSION_ID = "tg_session_key";
+    this.TRACER_SESSION_ID = "bitou_session_key";
 
     if (opts?.beforeEachSendPV) {
       this.beforeEachSendPV(opts.beforeEachSendPV);
@@ -154,8 +154,6 @@ export default class Tracer extends Base {
     }
 
     // 初始化业务逻辑
-    const speed = await getNetworkSpeed();
-    console.log("🚀 ~ Tracer ~ localStorage.setItem ~ speed:", speed, "KB");
     //  加载实体: 传参监视；默认 defaultModels 这个需要做处理
     for (const p of defaultModels) {
       const { model } = p;

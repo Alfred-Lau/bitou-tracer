@@ -1,4 +1,3 @@
-import { log } from 'utils';
 import Tracer from '../tracer';
 
 // TODO: implement hotjar plugin 热力图

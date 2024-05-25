@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-export const isBrowser = typeof window !== 'undefined';
+
+export const isBrowser = typeof window !== "undefined";
 export const noop = () => {};
 export const isFunction = (fn: any): fn is Function => {
-  return typeof fn === 'function';
+  return typeof fn === "function";
 };
 
 export const mergeOptions = (target: object, dest: object) => {
@@ -74,6 +75,9 @@ export const uuid = () => {
   return uuidv4();
 };
 
-export * as log from './log';
-export * as cookie from './cookie';
-export * from './constant';
+export * as log from "./log";
+export * as cookie from "./cookie";
+export * from "./constant";
+export * from "./network";
+export * from "./version";
+export * from "./ee";

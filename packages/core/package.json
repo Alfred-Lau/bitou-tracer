@@ -1,7 +1,7 @@
 {
   "name": "core",
   "version": "1.0.0",
-  "description": "",
+  "description": "bitou-tracer core",
   "main": "lib/index.js",
   "module": "lib/index.module.js",
   "types": "lib/index.d.ts",

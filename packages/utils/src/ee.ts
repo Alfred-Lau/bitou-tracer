@@ -8,7 +8,7 @@ export enum EventType {
 }
 
 export type EventTypeMap = keyof typeof EventType;
-class EventEmitter {
+export class EE {
   private readonly listeners: Map<EventTypeMap, handleType[]>;
   constructor() {
     // 事件监听收集器
@@ -19,7 +19,7 @@ class EventEmitter {
    * @param type
    * @param fn
    */
-  public on(this: EventEmitter, type: EventTypeMap, fn: handleType) {
+  public on(this: EE, type: EventTypeMap, fn: handleType) {
     if (!this.listeners.has(type) || !this.listeners.get(type)) {
       this.listeners.set(type, []);
     }
@@ -41,5 +41,3 @@ class EventEmitter {
    */
   public off(type: EventTypeMap, fn: handleType) {}
 }
-
-export default EventEmitter;

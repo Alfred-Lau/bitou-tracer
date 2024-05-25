@@ -1,9 +1,9 @@
 import UA from 'ua-parser-js';
+import { EE } from 'utils';
 
 import Tracer from '../tracer';
-import EventEmitter from '../utils/EventEmitter';
 
-export default class UserAgent extends EventEmitter implements Model {
+export default class UserAgent extends EE implements Model {
   private ua: UA;
   private tracer: Tracer;
   public cb: handleType | undefined;

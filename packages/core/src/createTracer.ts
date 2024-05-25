@@ -5,16 +5,7 @@ import {
 
 import Tracer from './tracer';
 
-declare global {
-  interface Window {
-    bitou_tracer: any;
-  }
-  interface Navigator {
-    connection: any;
-  }
-}
-
-function bootstrap(options?: CORE.BootstrapOptions) {
+function createTracer(options?: CORE.BootstrapOptions) {
   const opts = options;
   const tracer = new Tracer(opts);
   // 设置重复试探挂载逻辑
@@ -24,7 +15,7 @@ function bootstrap(options?: CORE.BootstrapOptions) {
       window.bitou_tracer = tracer;
     }
   } else {
-    setTimeout(bootstrap, options?.threshold);
+    setTimeout(createTracer, options?.threshold);
   }
 }
 
@@ -45,7 +36,7 @@ if (isBrowser) {
     oldOnError && oldOnError(e);
   };
   try {
-    bootstrap({
+    createTracer({
       beforeEachSendPV: testBeforeHook,
       afterEachSendPV: testAfterHook,
       threshold: 3000,
@@ -56,4 +47,4 @@ if (isBrowser) {
 }
 // 针对浏览器环境，直接挂载，npm 模式下 只导出对应方法
 
-export default bootstrap;
+export default createTracer;

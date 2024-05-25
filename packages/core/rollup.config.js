@@ -1,19 +1,21 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
 import buildIn from 'rollup-plugin-node-builtins';
+
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
+
 // import alias from '@rollup/plugin-alias';
 import pkg from './package.json';
-import path from 'path';
+
 const production = !process.env.ROLLUP_WATCH;
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/index.ts',
+    input: "src/index.ts",
     output: {
-      name: 'core',
+      name: "core",
       file: pkg.browser,
-      format: 'umd',
+      format: "umd",
       sourcemap: !production,
     },
     plugins: [
@@ -23,7 +25,7 @@ export default [
       typescript({
         sourceMap: !production,
         inlineSources: !production,
-        lib: ['es2015'],
+        lib: ["es2015", "dom"],
       }), // so Rollup can convert TypeScript to JavaScript
       // alias({
       //   entries: [
@@ -37,7 +39,7 @@ export default [
   },
 
   {
-    input: 'src/index.ts',
+    input: "src/index.ts",
     // external: ["ms"],
     plugins: [
       resolve(), // so Rollup can find `ms`
@@ -56,8 +58,8 @@ export default [
       // }),
     ],
     output: [
-      { file: pkg.main, format: 'cjs', sourcemap: !production },
-      { file: pkg.module, format: 'es', sourcemap: !production },
+      { file: pkg.main, format: "cjs", sourcemap: !production },
+      { file: pkg.module, format: "es", sourcemap: !production },
     ],
   },
 ];

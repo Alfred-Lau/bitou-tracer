@@ -5,14 +5,15 @@
 import {
   debounceFn,
   defineProperty,
+  getNetworkSpeed,
   isFunction,
   log,
   noop,
 } from 'utils';
 
-import http from '../http';
-import Tracer from '../tracer';
-import { getNetworkSpeed } from '../utils/network';
+import { handleType } from './BitouTracerType';
+import http from './http';
+import Tracer from './tracer';
 
 export type SendOptionType = {
   env: string;
@@ -20,7 +21,21 @@ export type SendOptionType = {
   throughAPI: boolean;
 };
 
-export default class Base implements BaseClass {
+declare class AbstractBaseClass {
+  constructor(name?: string);
+  public pluginCount: number;
+  public modelCount: number;
+  // 生命周期/发送请求之前调用
+  public beforeEachSendPV(fn: handleType): void;
+  // 生命周期/发送请求之后调用
+  public afterEachSendPV(fn: handleType): void;
+
+  // 上报相关逻辑: 重载接口
+  public send(eventName: string): void;
+  public send(eventName: string, payload: any): void;
+}
+
+export default class Base implements AbstractBaseClass {
   public http: (...args: any[]) => void;
   public beforeEachSendPVEvents: handleType[] = [];
   public afterEachSendPVEvents: handleType[] = [];
@@ -73,7 +88,6 @@ export default class Base implements BaseClass {
 
   protected async collectBaseInfo() {
     const network = await getNetworkSpeed();
-    console.log("🚀 ~ Base ~ collectBaseInfo ~ network:", network);
     const baseInfo = {
       network,
     };

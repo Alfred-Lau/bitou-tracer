@@ -6,10 +6,41 @@ import {
   log,
 } from 'utils';
 
-import Datasource from '../datasource';
+import Datasource from './datasource';
 
 const _csrf_authentication =
   cookie.getCookie(CSRF_AUTHORIZATION_KEY) || "OY3i2d-Dp9C2wGe14EslzT61";
+
+// 1. 图片接口上传；2. sendBeacon接口上传
+
+const REPORT_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://www.baidu.com"
+    : "http://localhost:4000";
+
+function xhr(data: string) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", REPORT_URL, true);
+  xhr.send();
+}
+
+function sendBeacon(data: string) {
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon(REPORT_URL, "");
+  }
+}
+
+function httpRequest(data: any) {
+  const body = normalizeBody(data);
+  if (navigator) {
+    sendBeacon(body);
+  } else {
+    xhr(body);
+  }
+}
+function normalizeBody(data: Record<string, any>) {
+  return encodeURIComponent(data.join(";"));
+}
 
 function genImgUrl(url: string, data: any) {
   const formatted = JSON.stringify(data);
@@ -27,10 +58,9 @@ export default function (
   data: SimpleEventPayloadType,
   throughAPI: boolean = false // 默认使用日志上传
 ) {
-  console.log("🚀 ~ throughAPI:", throughAPI);
   try {
     if (!throughAPI) {
-      const datasource = new Datasource("sls");
+      const datasource = new Datasource("rds");
       datasource.send(data);
       return;
     } else {

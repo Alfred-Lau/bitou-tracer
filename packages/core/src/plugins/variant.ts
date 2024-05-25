@@ -1,4 +1,3 @@
-import { log } from 'utils';
 import Tracer from '../tracer';
 
 // TODO：AB 实验模块
