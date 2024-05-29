@@ -36,4 +36,4 @@ jobs:
           # 使用我们之前配置在secrets里面的accesskeys来配置ossutil
           access-key-id: ${{ secrets.ACCESS_KEY }}
           access-key-secret: ${{ secrets.ACCESS_SECRET }}
-      - run: ossutil cp -rf packages/core/lib oss://tiangong-tracer
+      - run: ossutil cp -rf packages/core/lib oss://bitou-tracert
