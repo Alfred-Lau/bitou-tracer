@@ -4,6 +4,8 @@ https://datafun.bitou.tech/product/bitou-tracer
 
 ## Overview
 
+[![bitou-tracer deploy](https://github.com/Alfred-Lau/bitou-tracer/actions/workflows/deploy.yml/badge.svg?branch=feature%2Fpnpm)](https://github.com/Alfred-Lau/bitou-tracer/actions/workflows/deploy.yml)
+
 wip
 
 ## How to dev
