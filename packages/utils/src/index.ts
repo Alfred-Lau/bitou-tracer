@@ -81,3 +81,6 @@ export * from "./constant";
 export * from "./network";
 export * from "./version";
 export * from "./ee";
+export * from "./location";
+export * from "./query";
+export * from "./lstorage";
