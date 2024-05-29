@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+      - run: npm install -g pnpm
       - run: npm run build --if-present
       - name: deploy to OSS
         uses: manyuanrong/setup-ossutil@v2.0
