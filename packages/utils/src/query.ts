@@ -1,4 +1,4 @@
-import qs from "qs";
+import qs from 'querystring';
 
 export function parseObjToQuery(data: any): string {
   const result = [];
@@ -20,5 +20,5 @@ export function parseObjToQuery(data: any): string {
  * @return {*}
  */
 export function parseSearchQueryToObject(searchQuery: string) {
-  return qs.parse(searchQuery, { ignoreQueryPrefix: true });
+  return qs.parse(searchQuery);
 }

@@ -1,6 +1,6 @@
 import BaseDataSource from './base';
 
-const REPORT_URL = "http://localhost:4000/api/tiangong/v1/log";
+const REPORT_URL = "https://work.bitou.tech/api/log";
 
 function xhr(data: string) {
   const xhr = new XMLHttpRequest();
