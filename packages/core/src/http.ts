@@ -4,10 +4,10 @@ import {
   CSRF_AUTHORIZATION_KEY,
   isBrowser,
   log,
-} from 'utils';
-import { SimpleEventPayloadType } from 'utils/lib/BitouType';
+} from "utils";
+import { SimpleEventPayloadType } from "utils/lib/BitouType";
 
-import Datasource from './datasource';
+import Datasource from "./datasource";
 
 const _csrf_authentication =
   cookie.getCookie(CSRF_AUTHORIZATION_KEY) || "OY3i2d-Dp9C2wGe14EslzT61";
@@ -32,7 +32,7 @@ export default function (
 ) {
   try {
     if (!throughAPI) {
-      const datasource = new Datasource("rds");
+      const datasource = new Datasource("sls");
       datasource.send(data);
       return;
     } else {
